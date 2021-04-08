@@ -8,13 +8,13 @@ The code is a fully automated adaptation of a macro poreviously created by Bas P
 # Running the OrgaMovie Macro on the Workstation (DED-KOPS-001)
 
 1) Check that previous user has collected all their data, otherwise store/rename the _Output_Movies_ folder.
-2) Delete old files from D:\ANALYSIS DUMP. This is not essential but avoids confusion with new analysis.
+2) Delete old files from D:\ANALYSIS DUMP. This is not essential but avoids confusion with previous analyses.
     - Delete all folders called _Queue Exp \[\#\]_.
     - Delete previous output movies from _Output_Movies_ folder, or delete/rename the entire folder.
-      - MAKE SURE PREVIOUS USER HAS COLLECTED THEIR DATA BEFORE DELETING!.
+      - MAKE SURE PREVIOUS USER HAS COLLECTED THEIR DATA BEFORE DELETING!
     - Delete all _\*.txt_ files.
 3) Start FiJi.
-4) Start OrgaMovie code by hitting F11, or go to _Plugins > OrgaMovies > OrgaMovie Start
+4) Start OrgaMovie macro by hitting F11, or go to _Plugins > OrgaMovies > OrgaMovie Start
 5) Input your favorite settings (see below).
 6) Choose input folder where your raw data (\*.nd2 files) are located.
     - Please work from local or external hard disks and NOT from the server. 
@@ -28,31 +28,41 @@ The code is a fully automated adaptation of a macro poreviously created by Bas P
 ## Main Settings Dialog
 <img src="https://user-images.githubusercontent.com/14219087/114033156-4a4fa680-987d-11eb-9d75-38829f41b059.PNG" width="388" height="452">
 
-#### Data Input Settings
-- Filetype: currently the only option is '.nd2'.
+#### General Settings
+- Input filetype: currently the only option is '.nd2'.
 - Time interval: set the interval (in minutes) between consecutive frames.
 - Experiment name: Used for output file naming. Set a prefix for all output files, which is then combined with the file naming setting below to create unique filenames for each movie. Default is current date in yymmdd format.
 #### Movie Output Settings
 - Output format: Choose whether output videos should be in between \*.avi or \*.tif or both. Tifs are easier to use for downstream analysis in ImageJ but require significantly more diskspace.
-- Duration: The frame-rate of the output movie. Set how many seconds each frame stays in view when playing the movie.
-- Movie naming: What to use after the prefix (set above) to name individual output movies. Options are:
+- Frame rate: The frame rate of the output movie (for \*.avi). Set how many seconds each frame stays in view when playing the movie.
+- Output naming: What to use after the prefix (set above) to name individual output movies. Options are:
   - _linear_ = number movies consecutively from 1-N.
   - _filename_ = use the entire original filename (minus the extension).
   - _file index_ = use the original filename until the first underscore ( \_ ). Often filenames are numbered by the microsope software and this number is repeated after the underscore. E.g., the output resulting from _Point0004_Seq0004.nd2_, will be named \[date\]\_Point0004.avi.
 #### Automation Settings (on/off settings)
-- Drift correction - Uses _MultiStackReg_ plugin (default in FiJi) to correct drift and shaking of organoid.  If unchecked: the organoid will move across the frame as happened during filming. As a knock-on effect, this will require a larger crop-area (see next setting) leading to larger output file size.
+- Drift correction - Uses _MultiStackReg_ plugin (default in FiJi) to correct drift and shaking in movies.
+    - If unchecked: the organoid will move across the frame as happened during filming. As a knock-on effect, this will require a larger crop-area (see next setting) leading to larger output file size.
     - Note that the drift correction can lead to movies where it appears that a blacked out region is 'wiping' across your movie. This is in fact the organoid moving out of the field of view.
-- Auto-cropping: Detects portion of frame (XY) that is visited by the organoid in any Z or T and crops around tshis. If multiple organoid regions are found, cropping occurs around the largest organoid only. If unchecked: the entire frame is used leading to (unnecessarily) large file sizes and more cluttered movies. See default automation settings for more details.
-- Auto-contrasting: Automatically detects a good set of intensity values to use for contrasting (green and blue in original manual version of the macro). The lowest pixel value is based on a threshold that excludes most organoid pixels. The highest pixel value is a fraction of the brightest pixel in any Z or T frame. See default automation settings for more details. If unchecked: dimmest and brightest pixel values are used, which tends to not give great contrast but also no pixels are overexposed or lost as background. 
-- Last timepoint detection: Finds the last timepoint where an organoid is still visible within the frame. This is based on the coefficient of variation (mean/stdev) of all pixel values in the frame. The last timepoint considered is the first timepoint found where this coefficient is detected. If unchecked: all frames of the movie are included in the output, which will lead to (unnecessarily) large file sizes. See default automation settings for more details.
-- Change default settings: If this is checked, another dialog will be opened after this to set default automation settings. If few movies turn out imperfect, try running those manually (press F10) rather than changing the settings for all movies. If many movies turn out weird, perhaps changing default parameters can help. See below for details on these.
+- Auto-cropping: Detects portion of frame (XY) that is visited by the organoid in any Z or T and crops around tshis.
+    - If multiple organoid regions are found, cropping occurs around the largest organoid only. 
+    - If unchecked: the entire frame is used leading to (unnecessarily) large file sizes and more cluttered movies. 
+    - See default automation settings for more details.
+- Auto-contrasting: Automatically detects a good set of intensity values to use for contrasting (green and blue in original manual version of the macro). The lowest pixel value is based on a threshold that excludes most organoid pixels. The highest pixel value is a fraction of the brightest pixel in any Z or T frame.  
+    - If unchecked: dimmest and brightest pixel values are used, which tends to not give great contrast but also no pixels are overexposed or lost as background.
+    - See default automation settings for more details.
+- Last timepoint detection: Finds the last timepoint where an organoid is still visible within the frame. This is based on the coefficient of variation (mean/stdev) of all pixel values in the frame. The last timepoint considered is the first timepoint found where this coefficient is detected. 
+    - If unchecked: all frames of the movie are included in the output, which will lead to (unnecessarily) large file sizes.
+    - See default automation settings for more details.
+- Change default settings: If this is checked, another dialog will be opened after this to set default automation settings.
+    - If few movies turn out imperfect, try running those manually (press F10) rather than changing the settings for all movies.
+    - If many movies turn out weird, perhaps changing default parameters can help. See below for details on these.
 
 ## Automation Settings Dialog
 <img src="https://user-images.githubusercontent.com/14219087/114039595-2b541300-9883-11eb-8b56-d8218963c0ae.png" width="322" height="256">
 If few movies turn out imperfect, try running those manually (press F10) rather than changing the settings for all movies. If many movies turn out weird, perhaps changing default parameters can help.
 
 #### Auto-crop Settings
-- Minimum organoid size: the minimum organoid size (in Î¼m<sup>2</sup>) detected to crop around. If no organoid of this size or larger is found, then the entire frame is used.
+- Minimum organoid size: the minimum organoid size (in μm<sup>2</sup>) detected to crop around. If no organoid of this size or larger is found, then the entire frame is used.
 - Boundary around organoid: the number of pixels around the extreme edges of the organoid included in the cropped region.
 #### Contrast Automation
 - Threshold method: Choose between the ImageJ default threshold methods to detect background pixels.
