@@ -62,13 +62,17 @@ The code is a fully automated adaptation of a macro poreviously created by Bas P
 If few movies turn out imperfect, try running those manually (press F10) rather than changing the settings for all movies. If many movies turn out weird, perhaps changing default parameters can help.
 
 #### Auto-crop Settings
-- Minimum organoid size: the minimum organoid size (in μm<sup>2</sup>) detected to crop around. If no organoid of this size or larger is found, then the entire frame is used.
+- Minimum organoid size: the minimum organoid size (in μm<sup>2</sup>) detected to crop around.
+    - If no organoid of this size or larger is found, then the entire frame is used.
 - Boundary around organoid: the number of pixels around the extreme edges of the organoid included in the cropped region.
 #### Contrast Automation
 - Threshold method: Choose between the ImageJ default threshold methods to detect background pixels.
-- Brightest-point factor: Fold-change between the brightest point detected in the movie and what is used as the output brightest point (probably should be replaced by a percentile overexposed pixels).
-- Gamma factor: Copied from original macro. Applies a [Gamma correction](https://en.wikipedia.org/wiki/Gamma_correction) on the output images. It is unclear to me what exactly this setting does, but the original macro stated "brings low and high intensities together".
-- Multiply factor: Copied from original macro. It is unclear to me what exactly this setting does, but the original macro stated "for depth coded channel".
+- Brightest-point factor: Fold-change between the brightest point detected in the movie and what is used as the output brightest point
+    - This should be replaced by a percentile overexposed pixels, but for now I will stick to it as is.
+- Gamma factor (copied from original macro). Applies a [Gamma correction](https://en.wikipedia.org/wiki/Gamma_correction) on the output images. 
+    - The original macro stated "brings low and high intensities together", but I don't fully understand what a gamma correction does.
+- Multiply factor (copied from original macro): I don't know what this setting does, but it was present in the original macro.
+    - The original macro stated "for depth coded channel", but it is unclear to me what this setting changes.
 #### Time-crop Settings
 - CoV cutoff: Cut-off value for coefficient of variation (mean/stdev) for detecting last time-point. Higher values will include more fuzzy/empty frames.
 - Minimum length: Minimum length of movie in case CoV cut-off is reached previously. This is mainly included as a workaround for movies that reach the CoV from frame 1, which leads to a crash.
