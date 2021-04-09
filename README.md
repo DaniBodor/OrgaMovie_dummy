@@ -1,9 +1,12 @@
 # OrgaMovie Macro Information
 
-This FiJi/ImageJ macro takes any number 4D (xyzt) \*.nd2 image files of organoids and creates color-coded (for depth) time-lapse movies.
+This FiJi/ImageJ macro takes any number 4D (xyzt) \*.nd2 image files of organoids and creates color-coded (for depth) time-lapse movies (as below).
+
+<img src="https://user-images.githubusercontent.com/14219087/114186287-f4473580-9946-11eb-99b2-1f3d73b78a69.png">
+
 The macro will not run on recent versions of ImageJ. The most recent version of ImageJ that this has been stably tested on is 1.49b. Also, the macro currently only works from the workstation (DED-KOPS-001) in the Hubrecht Lab (2nd floor student room). If either of these is limiting for you, please talk to me to figure out a solution.
 
-The code is a fully automated adaptation of a macro previously created by Bas Ponsioen and  René M Overmeer (I think), first published in _[Targeting mutant RAS in patient-derived colorectal cancer organoids by combinatorial drug screening](https://elifesciences.org/articles/18489)_, eLife 2016;5:e18489 doi: 10.7554/eLife.18489 (I think).
+The code is a fully automated adaptation of a macro previously created by Bas Ponsioen and  René M Overmeer (I think), first published in _[Targeting mutant RAS in patient-derived colorectal cancer organoids by combinatorial drug screening](https://elifesciences.org/articles/18489)_, eLife 2016;5:e18489 doi: 10.7554/eLife.18489 (I think). Original macro version 2016_03_24 was used as a basis.
 
 # Running the OrgaMovie Macro on the Workstation (DED-KOPS-001)
 
@@ -58,18 +61,19 @@ The code is a fully automated adaptation of a macro previously created by Bas Po
     - If many movies turn out weird, perhaps changing default parameters can help. See below for details on these.
 
 ## Automation Settings Dialog
-<img src="https://user-images.githubusercontent.com/14219087/114039595-2b541300-9883-11eb-8b56-d8218963c0ae.png" width="322" height="256">
+<img src="https://user-images.githubusercontent.com/14219087/114186945-b7c80980-9947-11eb-85ce-f4b3b27e777a.png" width="322" height="294">
 If few movies turn out imperfect, try running those manually (press F10) rather than changing the settings for all movies. If many movies turn out weird, perhaps changing default parameters can help.
 
 #### Auto-crop Settings
 - Minimum organoid size: the minimum organoid size (in μm<sup>2</sup>) detected to crop around.
     - If no organoid of this size or larger is found, then the entire frame is used.
 - Boundary around organoid: the number of pixels around the extreme edges of the organoid included in the cropped region.
-#### Contrast Automation
-- Threshold method: Choose between the ImageJ default threshold methods to detect background pixels.
-- Brightest-point factor: Fold-change between the brightest point detected in the movie and what is used as the output brightest point
-    - This should be replaced by a percentile overexposed pixels, but for now I will stick to it as is.
-- Gamma factor (copied from original macro). Applies a [Gamma correction](https://en.wikipedia.org/wiki/Gamma_correction) on the output images. 
+#### Contrast Automation Settings
+- Minimum threshold method: Choose between the ImageJ default threshold methods to detect brightness of background pixels.
+- Maximum threshold method: Choose between the ImageJ default threshold methods to automate maximum brightness detection.
+- Brightest-point factor: Fold-change between the brightest point detected above and what is actually used as the output brightest point
+    - Lower values create brighter movies, but also will also include more overexposed pixels. Probably between 0.85-1.15 is ideal.
+- Gamma factor (copied from original macro). Applies a [gamma correction](https://en.wikipedia.org/wiki/Gamma_correction) on the output images. 
     - The original macro stated "brings low and high intensities together", but I don't fully understand what a gamma correction does.
 - Multiply factor (copied from original macro): I don't know what this setting does, but it was present in the original macro.
     - The original macro stated "for depth coded channel", but it is unclear to me what this setting changes.
