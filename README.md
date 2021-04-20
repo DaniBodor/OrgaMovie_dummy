@@ -31,30 +31,36 @@ The code is a fully automated adaptation of a macro previously created by Bas Po
 # Macro Settings
 
 ## Main Settings Dialog
-<img src="https://user-images.githubusercontent.com/14219087/114033156-4a4fa680-987d-11eb-9d75-38829f41b059.PNG" width="388" height="452">
+<img src="https://user-images.githubusercontent.com/14219087/115407951-c12b5e80-a1f0-11eb-9efc-500a5c805bc6.PNG" width="388" height="452">
 
 #### General Settings
 - Input filetype: currently the only option is '.nd2'.
+- Channel number: set the channel to use in terms of channel order (so N<sup>th</sup> channel) 
+    - Can be ignored if single-channel (i.e. single-color) data is used.
+    - Because false colors are used to signify depth, it is unclear how to implement multi-channel depth in this macro. Talk to me if you are interested in this to see if we can figure something out.
 - Time interval: set the interval (in minutes) between consecutive frames.
-- Experiment name: Used for output file naming. Set a prefix for all output files, which is then combined with the file naming setting below to create unique filenames for each movie. Default is current date in yymmdd format.
+- Experiment name: Used for output file naming. Set a prefix for all output files, which is then combined with the file naming setting below to create unique filenames for each movie.
+    - Default is your windows account + the current date in yymmdd format.
 #### Movie Output Settings
 - Output format: Choose whether output videos should be in between \*.avi or \*.tif or both. Tifs are easier to use for downstream analysis in ImageJ but require significantly more diskspace.
 - Frame rate: The frame rate of the output movie (for \*.avi). Set how many seconds each frame stays in view when playing the movie.
 - Output naming: What to use after the prefix (set above) to name individual output movies. Options are:
   - _linear_ = number movies consecutively from 1-N.
   - _filename_ = use the entire original filename (minus the extension).
-  - _file index_ = use the original filename until the first underscore ( \_ ). Often filenames are numbered by the microsope software and this number is repeated after the underscore. E.g., the output resulting from _Point0004_Seq0004.nd2_, will be named \[date\]\_Point0004.avi.
-#### Automation Settings (on/off settings)
-- Drift correction - Uses _MultiStackReg_ plugin (default in FiJi) to correct drift and shaking in movies.
+  - _file index_ = use the original filename until the first underscore ( \_ ). Often filenames are numbered by the microsope software and this number is repeated after the underscore. E.g., the output resulting from _Point0004_Seq0004.nd2_, will be named \[experiment_name\]\_Point0004.avi.
+#### Automation Settings (on/off)
+- Drift correction - Uses _[MultiStackReg](http://bigwww.epfl.ch/thevenaz/stackreg/)_ plugin (default in FiJi) to correct drift and shaking in movies.
     - If unchecked: the organoid will move across the frame as happened during filming. As a knock-on effect, this will require a larger crop-area (see next setting) leading to larger output file size.
     - Note that the drift correction can lead to movies where it appears that a blacked out region is 'wiping' across your movie. This is in fact the organoid moving out of the field of view.
-- Auto-cropping: Detects portion of frame (XY) that is visited by the organoid in any Z or T and crops around tshis.
-    - If multiple organoid regions are found, cropping occurs around the largest organoid only. 
-    - If unchecked: the entire frame is used leading to (unnecessarily) large file sizes and more cluttered movies. 
+- Auto-cropping: Detects portion of frame (XY) that is visited by the organoid in any Z or T and crops around this.
+    - If multiple organoid regions are found, cropping occurs around the largest region only. 
+    - If unchecked: the entire frame is used, leading to (unnecessarily) large file sizes and more cluttered movies. 
     - See default automation settings for more details.
-- Auto-contrasting: Automatically detects a good set of intensity values to use for contrasting (green and blue in original manual version of the macro). The lowest pixel value is based on a threshold that excludes most organoid pixels. The highest pixel value is a fraction of the brightest pixel in any Z or T frame.  
+- Auto-contrasting: Automatically detects a good set of intensity values to use for contrasting (green and blue in original manual version of the macro). These are based on a lowest threshold values that exclude most organoid pixels and a highest threshold value that will include a small proportion of pixels.
     - If unchecked: dimmest and brightest pixel values are used, which tends to not give great contrast but also no pixels are overexposed or lost as background.
-    - See default automation settings for more details.
+    - Contrasting cannot be easily adjusted in the resulting output, as RGB images/movies are produced.
+    - See default automation settings for more details on thresholding![SettingsWindow](https://user-images.githubusercontent.com/14219087/115407927-bc66aa80-a1f0-11eb-932e-3426107c77cf.PNG)
+.
 - Last timepoint detection: Finds the last timepoint where an organoid is still visible within the frame. This is based on the coefficient of variation (mean/stdev) of all pixel values in the frame. The last timepoint considered is the first timepoint found where this coefficient is detected. 
     - If unchecked: all frames of the movie are included in the output, which will lead to (unnecessarily) large file sizes.
     - See default automation settings for more details.
