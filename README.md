@@ -59,7 +59,7 @@ The code is a fully automated adaptation of a macro previously created by Bas Po
 - Auto-contrasting: Automatically detects a good set of intensity values to use for contrasting (green and blue in original manual version of the macro). These are based on a lowest threshold values that exclude most organoid pixels and a highest threshold value that will include a small proportion of pixels.
     - If unchecked: dimmest and brightest pixel values are used, which tends to not give great contrast but also no pixels are overexposed or lost as background.
     - Contrasting cannot be easily adjusted in the resulting output, as RGB images/movies are produced.
-    - See default automation settings for more details on thresholding![SettingsWindow](https://user-images.githubusercontent.com/14219087/115407927-bc66aa80-a1f0-11eb-932e-3426107c77cf.PNG)
+    - See default automation settings for more details on thresholding.
 .
 - Last timepoint detection: Finds the last timepoint where an organoid is still visible within the frame. This is based on the coefficient of variation (mean/stdev) of all pixel values in the frame. The last timepoint considered is the first timepoint found where this coefficient is detected. 
     - If unchecked: all frames of the movie are included in the output, which will lead to (unnecessarily) large file sizes.
