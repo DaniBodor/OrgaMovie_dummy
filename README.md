@@ -6,6 +6,8 @@ This FiJi/ImageJ macro takes any number 4D (xyzt) \*.nd2 image files of organoid
 
 The macro will not run on recent versions of ImageJ. The most recent version of ImageJ that this has been stably tested on is 1.49b. Also, the macro currently only works from the workstation (DED-KOPS-001) in the Hubrecht Lab (2nd floor student room). If either of these is limiting for you, please talk to me to figure out a solution.
 
+I have noticed that many people have their own installation of FiJi on their account. However, there is also a common installation of FiJi on the D-drive (strictly speaking FiJi is not installed, but just exists on the disk). I have installed this plugin-set **only on the common FiJi installation**. I recommend you delete your own insance of FiJi if you are not using it for anything else and always work from the common one, which is located under *D:\FiJi.app*, and create a shortcut for *imagej-win64.exe* on your desktop or taskbar.
+
 The code is a fully automated adaptation of a macro previously created by Bas Ponsioen and  René M Overmeer (I think), first published in _[Targeting mutant RAS in patient-derived colorectal cancer organoids by combinatorial drug screening](https://elifesciences.org/articles/18489)_, eLife 2016;5:e18489 doi: 10.7554/eLife.18489 (I think). Original macro version 2016_03_24 was used as a basis.
 
 # Running the OrgaMovie Macro on the Workstation (DED-KOPS-001)
