@@ -1,14 +1,13 @@
 # OrgaMovie Macro Information
 
-This FiJi/ImageJ macro takes any number 4D (xyzt) \*.nd2 image files of organoids and creates color-coded (for depth) time-lapse movies (as below).
+This FiJi/ImageJ macro takes any number 4D (xyzt) \*.nd2 image files of organoids and creates color-coded (for depth) time-lapse movies (see fig below).  
+The code is a fully automated adaptation of a macro (version 2016_03_24) previously created by Bas Ponsioen and  René Overmeer, first published in _[Targeting mutant RAS in patient-derived colorectal cancer organoids by combinatorial drug screening](https://elifesciences.org/articles/18489)_, (eLife 2016;5:e18489 doi: 10.7554/eLife.18489).
 
 <img src="https://user-images.githubusercontent.com/14219087/114186287-f4473580-9946-11eb-99b2-1f3d73b78a69.png">
 
 The macro will not run on recent versions of ImageJ. The most recent version of ImageJ that this has been stably tested on is 1.49b. Also, the macro currently only works from the workstation (DED-KOPS-001) in the Hubrecht Lab (2nd floor student room). If either of these is limiting for you, please talk to me to figure out a solution.
 
-I have noticed that many people have their own installation of FiJi on their account. However, there is also a common installation of FiJi on the D-drive (strictly speaking FiJi is not installed, but just exists on the disk). I have installed this plugin-set **only on the common FiJi installation**. I recommend you delete your own insance of FiJi if you are not using it for anything else and always work from the common one, which is located under *D:\FiJi.app*, and create a shortcut for *imagej-win64.exe* on your desktop or taskbar.
-
-The code is a fully automated adaptation of a macro previously created by Bas Ponsioen and  René M Overmeer (I think), first published in _[Targeting mutant RAS in patient-derived colorectal cancer organoids by combinatorial drug screening](https://elifesciences.org/articles/18489)_, eLife 2016;5:e18489 doi: 10.7554/eLife.18489 (I think). Original macro version 2016_03_24 was used as a basis.
+I have noticed that many people have their own installation of FiJi on their account. However, there is also a common installation of FiJi on the D-drive (strictly speaking FiJi is not installed, but just exists on the disk). I have installed this plugin-set **only on the common FiJi installation**. I recommend you delete your own insance of FiJi if you are not using it for anything else and always work from the common one, which is located under _D:\FiJi.app_, and create a shortcut for _ImageJ-win64.exe_ on your desktop or taskbar.
 
 # Running the OrgaMovie Macro on the Workstation (DED-KOPS-001)
 
@@ -18,15 +17,14 @@ The code is a fully automated adaptation of a macro previously created by Bas Po
     - Delete previous output movies from _Output_Movies_ folder, or delete/rename the entire folder.
       - MAKE SURE PREVIOUS USER HAS COLLECTED THEIR DATA BEFORE DELETING!
     - Delete all _\*.txt_ files.
-3) Start FiJi.
-4) Start OrgaMovie macro by hitting F11, or go to _Plugins > OrgaMovies > OrgaMovie Start
+3) Start FiJi from the common folder **_D:\Fiji.app\_**.
+4) Start OrgaMovie macro by hitting F11, or go to _Plugins > OrgaMovies > OrgaMovie Start_.
 5) Input your favorite settings (see below).
-6) Choose input folder where your raw data (\*.nd2 files) are located.
+6) Choose input folder where your raw data (_\*.nd2_ files) are located.
     - Please work from local or external hard disks and NOT from the server. 
-8) Wait overnight (rough time estimate: ~14h for 33 movies totalling ~200 GB).
-9) Collect your output data from _D:\ANALYSIS DUMP\Final_Movies_.
-10) Check that your movies are ok and then delete them from the D-drive.
-
+8) Wait overnight (rough time estimate: ~14-22h).
+9) Collect your output data from _D:\ANALYSIS DUMP\\\_Movies\_\[exp-name\]\\_.
+10) Check that your movies are ok and then delete them from the analysis dump.
 
 # Macro Settings
 
@@ -47,7 +45,7 @@ The code is a fully automated adaptation of a macro previously created by Bas Po
 - Output naming: What to use after the prefix (set above) to name individual output movies. Options are:
   - _linear_ = number movies consecutively from 1-N.
   - _filename_ = use the entire original filename (minus the extension).
-  - _file index_ = use the original filename until the first underscore ( \_ ). Often filenames are numbered by the microsope software and this number is repeated after the underscore. E.g., the output resulting from _Point0004_Seq0004.nd2_, will be named \[experiment_name\]\_Point0004.avi.
+  - _file index_ = use the original filename until the first underscore ( \_ ). Often filenames are numbered by the microsope software and this number is repeated after the underscore. E.g., the output resulting from _Point0004_Seq0004.nd2_, will be named _\[exp-name\]\_Point0004.avi_.
 #### Automation Settings (on/off)
 - Drift correction - Uses _[MultiStackReg](http://bigwww.epfl.ch/thevenaz/stackreg/)_ plugin (default in FiJi) to correct drift and shaking in movies.
     - If unchecked: the organoid will move across the frame as happened during filming. As a knock-on effect, this will require a larger crop-area (see next setting) leading to larger output file size.
