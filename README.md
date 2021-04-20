@@ -17,7 +17,7 @@ I have noticed that many people have their own installation of FiJi on their acc
     - Delete previous output movies from _Output_Movies_ folder, or delete/rename the entire folder.
       - MAKE SURE PREVIOUS USER HAS COLLECTED THEIR DATA BEFORE DELETING!
     - Delete all _\*.txt_ files.
-3) Start FiJi from the common folder **_D:\Fiji.app\_**.
+3) Start FiJi from the common folder ***D:\Fiji.app\\***.
 4) Start OrgaMovie macro by hitting F11, or go to _Plugins > OrgaMovies > OrgaMovie Start_.
 5) Input your favorite settings (see below).
 6) Choose input folder where your raw data (_\*.nd2_ files) are located.
