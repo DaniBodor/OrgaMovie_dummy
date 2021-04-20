@@ -1,6 +1,6 @@
 # OrgaMovie Macro Information
 
-This FiJi/ImageJ macro takes any number 4D (xyzt) \*.nd2 image files of organoids and creates color-coded (for depth) time-lapse movies (see fig below).  
+This FiJi/ImageJ macro takes any number 4D (xyzt) _\*.nd2_ image files of organoids and creates color-coded (for depth) time-lapse movies (see fig below).  
 The code is a fully automated adaptation of a macro (version 2016_03_24) previously created by Bas Ponsioen and  René Overmeer, first published in _[Targeting mutant RAS in patient-derived colorectal cancer organoids by combinatorial drug screening](https://elifesciences.org/articles/18489)_, (eLife 2016;5:e18489 doi: 10.7554/eLife.18489).
 
 <img src="https://user-images.githubusercontent.com/14219087/114186287-f4473580-9946-11eb-99b2-1f3d73b78a69.png">
@@ -67,8 +67,9 @@ I have noticed that many people have their own installation of FiJi on their acc
     - If many movies turn out weird, perhaps changing default parameters can help. See below for details on these.
 
 ## Automation Settings Dialog
-<img src="https://user-images.githubusercontent.com/14219087/114186945-b7c80980-9947-11eb-85ce-f4b3b27e777a.png" width="322" height="294">
 If few movies turn out imperfect, try running those manually (press F10) rather than changing the settings for all movies. If many movies turn out weird, perhaps changing default parameters can help.
+
+<img src="https://user-images.githubusercontent.com/14219087/115420299-50d60a80-a1fb-11eb-8ed6-be43368574f1.png" width="322" height="294">
 
 #### Auto-crop Settings
 - Minimum organoid size: the minimum organoid size (in μm<sup>2</sup>) detected to crop around.
